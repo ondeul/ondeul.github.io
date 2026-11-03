@@ -118,7 +118,7 @@ div.ph{cursor:default}
 .item.feat .tag{background:color-mix(in srgb,var(--green-ink) 14%,transparent);color:var(--green-ink)}
 .item.feat .top::before{content:"추천 수업";align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.06em;padding:3px 10px;border-radius:999px;background:var(--green-ink);color:var(--green);margin-bottom:6px}
 @media (max-width:420px){.item.feat{grid-template-columns:minmax(0,1fr)}.item.feat .body{padding:0 4px 4px}.item p{font-size:12px}.tags .tag:nth-child(2){display:none}.item.feat .tags .tag:nth-child(2){display:inline}}
-.notice{margin:0;padding:0 4px;font-size:13px;line-height:1.7;color:var(--muted)}
+.notice{margin:0;padding:0 4px;word-break:keep-all;font-size:13px;line-height:1.7;color:var(--muted)}
 .empty{color:var(--muted);font-size:14px;background:var(--surface);border-radius:var(--r-md);padding:18px}
 .ask{background:var(--surface);border-radius:var(--r-lg);padding:22px 20px;display:flex;flex-direction:column;gap:12px;border:1.5px solid var(--green)}
 .ask textarea{width:100%;font:inherit;font-size:13.5px;background:var(--soft);color:var(--ink);border:0;border-radius:12px;padding:12px;resize:vertical}
@@ -365,7 +365,7 @@ function renderResult(){
   let html=`<section style="display:flex;flex-direction:column;gap:16px">
     <div class="card" style="gap:10px"><div class="qnum">선택한 조건</div><div class="summary">${tags.map(t=>`<span>${t}</span>`).join("")}</div>
       ${assistNote()}</div>
-    <p class="notice"><b class="emph">자세한 금액과 구성은 인원·예산·일정에 맞춰 문의 주시면 안내드립니다.<br>같은 품목도 예산에 따라 크기나 도안을 조절할 수 있습니다.</b></p>`;
+    <p class="notice"><b class="emph">자세한 금액과 구성은<br>인원•예산•일정에 맞춰 문의 주시면 안내드립니다.<br>같은 품목도 예산에 따라 크기나 도안을 조절할 수 있습니다.</b></p>`;
   if(fit.length) html+=`<h2 class="sec-title band">예산에 딱 맞는 수업 <em>${fit.length}개</em></h2>${grid(fit,false,true)}`;
   if(low.length) html+=`<h2 class="sec-title band">예산보다 부담 없는 수업 <em>${low.length}개</em></h2>${grid(low,false,!fit.length)}`;
   if(!fit.length&&!low.length) html+=`<div class="empty">조건에 맞는 수업이 없습니다. 아래 문의로 조건을 남겨주시면 예산에 맞춘 구성을 따로 제안드리겠습니다.</div>`;
