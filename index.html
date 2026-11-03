@@ -184,49 +184,49 @@ const UPSELL_GAP = 5000;
 const ASSIST = {rattan:13, glass:20}, ASSIST_FEE = 100000;
 const T = (k,p,note)=>({k,p,note});
 const ITEMS = [
-  {id:"tray", craft:"rattan", name:"라탄 타원 트레이", hours:1.5, size:"가로 28cm · 세로 13cm", photo:"cf3450efc2e9c9baf2cfe2b197be3c3a",
+  {id:"tray", craft:"rattan", name:"타원 트레이", hours:1.5, size:"가로 28cm · 세로 13cm", photo:"cf3450efc2e9c9baf2cfe2b197be3c3a",
    desc:"자작나무 바닥판에 라탄을 엮는 기초 품목입니다. 바닥이 잡혀 있어 처음 해보는 분도 형태가 잘 나옵니다.", tiers:[T("표준",45000)]},
-  {id:"flower", craft:"rattan", name:"라탄 꽃잎 바구니", hours:1.5, size:"지름 15cm · 높이 7~9cm", photo:"9185e06979f43203b6e35bd534cd7da2",
+  {id:"flower", craft:"rattan", name:"꽃잎 바구니", hours:1.5, size:"지름 15cm · 높이 7~9cm", photo:"9185e06979f43203b6e35bd534cd7da2",
    desc:"원형 바닥에 꽃잎 모양을 만들며 엮는 바구니입니다. 과일·간식 바구니로 많이 사용합니다.", tiers:[T("표준",45000)]},
-  {id:"woodbox", craft:"rattan", name:"라탄 우드함", hours:1.5, size:"지름 13cm · 높이 7cm", photo:"5f3d840ede465523fa5d7c314ee35128",
+  {id:"woodbox", craft:"rattan", name:"우드함", hours:1.5, size:"지름 13cm · 높이 7cm", photo:"5f3d840ede465523fa5d7c314ee35128",
    desc:"우드 프레임 구멍에 라탄을 꽂아 엮는 뚜껑 있는 수납함입니다. 형태가 틀어지지 않아 완성도가 높습니다.", tiers:[T("표준",60000)]},
-  {id:"stand", craft:"rattan", name:"라탄 스탠드", hours:1.5, size:"바닥 지름 7.5cm · 높이 21cm", photo:"27772eea31e204dcfac20109f5f03108",
+  {id:"stand", craft:"rattan", name:"스탠드", hours:1.5, size:"바닥 지름 7.5cm · 높이 21cm", photo:"27772eea31e204dcfac20109f5f03108",
    desc:"스탠드 몸통을 라탄으로 감싸 엮습니다. 단체 수업에서 가장 많이 선택하는 품목 중 하나입니다. 전구 포함.", tiers:[T("표준",60000)]},
-  {id:"bead", craft:"rattan", name:"라탄 구슬 바구니", hours:2, size:"가로 17cm · 세로 13cm", photo:"580a610921e0625e99c5e7dc01e931cd",
+  {id:"bead", craft:"rattan", name:"구슬 바구니", hours:2, size:"가로 17cm · 세로 13cm", photo:"580a610921e0625e99c5e7dc01e931cd",
    desc:"캐릭터 모양 합판에 구슬을 넣어 엮는 아기자기한 바구니입니다.", tiers:[T("표준",60000)]},
-  {id:"rclock", craft:"rattan", name:"라탄 해바라기 시계", hours:2, size:"지름 20cm", photo:"011d6b415a8fda7f54c837835f6d8c6e",
+  {id:"rclock", craft:"rattan", name:"해바라기 시계", hours:2, size:"지름 20cm", photo:"011d6b415a8fda7f54c837835f6d8c6e",
    desc:"노란 환심으로 해바라기를 표현한 벽시계입니다. 무브먼트·바늘·건전지 포함.", tiers:[T("표준",60000)]},
-  {id:"miniled", craft:"glass", name:"글라스아트 미니 LED조명", hours:1, size:"가로 8cm · 세로 8cm", photo:"a8c19a0f7fd13c47035bacba52495bb3",
+  {id:"miniled", craft:"glass", name:"미니 LED조명", hours:1, size:"가로 8cm · 세로 8cm", photo:"a8c19a0f7fd13c47035bacba52495bb3",
    desc:"작은 아크릴을 글라스아트로 꾸민 뒤 LED 조명을 연결해 완성합니다. 짧은 시간에 만들 수 있는 소품입니다.", tiers:[T("표준",25000)]},
-  {id:"heart", craft:"glass", name:"글라스아트 하트 거울", hours:1, size:"가로 13cm · 세로 13cm", photo:"a0f290ed36852f42e1d2f454f1eaa048",
+  {id:"heart", craft:"glass", name:"하트아크릴거울", hours:1, size:"가로 13cm · 세로 13cm", photo:"a0f290ed36852f42e1d2f454f1eaa048",
    desc:"하트 아크릴 거울을 글라스아트로 꾸밉니다. 도안이 어렵지 않아 쉽게 완성할 수 있습니다.", tiers:[T("표준",35000)]},
-  {id:"doorbell", craft:"glass", name:"글라스아트 도어벨", hours:1.5, size:"디자인별 상이", photo:"0e37dcdb4e09212454afb8ea419433db",
+  {id:"doorbell", craft:"glass", name:"도어벨", hours:1.5, size:"디자인별 상이", photo:"0e37dcdb4e09212454afb8ea419433db",
    desc:"아크릴에 필름지와 리드테이프를 붙이고 종을 달아 완성합니다. 글라스아트에서 가장 많이 하는 품목입니다.", tiers:[T("표준",40000)]},
-  {id:"gpencil", craft:"glass", name:"글라스아트 연필꽂이", hours:1.5, size:"6.5×6.5cm · 높이 10cm", photo:"92f66b735175f906e3e6fba9310c9667",
+  {id:"gpencil", craft:"glass", name:"연필꽂이", hours:1.5, size:"6.5×6.5cm · 높이 10cm", photo:"92f66b735175f906e3e6fba9310c9667",
    desc:"아크릴 연필꽂이를 글라스아트로 꾸며 책상 소품으로 사용합니다.", tiers:[T("표준",45000)]},
-  {id:"outlet", craft:"glass", name:"글라스아트 콘센트 무드등", hours:1, size:"가로 8cm · 세로 12cm", photo:"a94a791d27d4d2904945c0cf3268c53c",
+  {id:"outlet", craft:"glass", name:"콘센트 무드등", hours:1, size:"가로 8cm · 세로 12cm", photo:"a94a791d27d4d2904945c0cf3268c53c",
    desc:"아크릴을 꾸민 뒤 콘센트 조명에 붙여 무드등으로 사용합니다. 탈부착이 가능합니다.", tiers:[T("표준",50000)]},
-  {id:"miniclock", craft:"glass", name:"글라스아트 미니 방패시계", hours:2, size:"가로 15cm · 세로 12cm", photo:"8832b45204eda97c6da70a647d8d3c73",
+  {id:"miniclock", craft:"glass", name:"방패시계(미니)", hours:2, size:"가로 15cm · 세로 12cm", photo:"8832b45204eda97c6da70a647d8d3c73",
    desc:"방패 모양 아크릴을 꾸미는 시계입니다. 벽에 걸거나 이젤에 올려 탁상용으로 사용합니다.", tiers:[T("표준",55000)]},
-  {id:"ovalmirror", craft:"glass", name:"글라스아트 타원 거울", hours:2, size:"15×17cm (거울 6.8×9cm)", photo:"c42a4b458e0e7c79fceee8a717937d83",
+  {id:"ovalmirror", craft:"glass", name:"타원거울", hours:2, size:"15×17cm (거울 6.8×9cm)", photo:"c42a4b458e0e7c79fceee8a717937d83",
    desc:"넓은 타원 아크릴 테두리를 꾸미는 거울입니다. 인테리어 소품으로 좋습니다.", tiers:[T("표준",60000)]},
-  {id:"apple", craft:"glass", name:"글라스아트 애플 벽시계", hours:1.5, size:"가로 14cm · 세로 14cm", photo:"780d5116a9beeec8e580101208c2521b",
+  {id:"apple", craft:"glass", name:"애플벽시계", hours:1.5, size:"가로 14cm · 세로 14cm", photo:"780d5116a9beeec8e580101208c2521b",
    desc:"사과 모양 아크릴 시계입니다. 비교적 짧은 시간에 완성도 높게 만들 수 있고, 벽걸이·탁상 모두 가능합니다.", tiers:[T("표준",55000)]},
-  {id:"frame", craft:"glass", name:"글라스아트 원형 액자·시계", hours:2, size:"지름 17cm", photo:"0261e12f62dc5fb662943a4ed64b5ded",
+  {id:"frame", craft:"glass", name:"원형액자 or 시계", hours:2, size:"지름 17cm", photo:"0261e12f62dc5fb662943a4ed64b5ded",
    desc:"원형 아크릴을 꾸며 우드 프레임에 끼워 완성합니다. 액자나 시계로 만들 수 있습니다.", tiers:[T("표준",55000)]},
-  {id:"tissue", craft:"glass", name:"글라스아트 휴지케이스", hours:2, size:"13×14cm / 20×12×9cm", photo:"c94e86edd1f0ff91ae38c42cd75afa58",
+  {id:"tissue", craft:"glass", name:"휴지케이스", hours:2, size:"13×14cm / 20×12×9cm", photo:"c94e86edd1f0ff91ae38c42cd75afa58",
    desc:"투명 아크릴 휴지케이스에 도안을 올려 꾸밉니다. 어느 공간에나 잘 어울립니다.", tiers:[T("표준",60000)]},
-  {id:"rabbit", craft:"glass", name:"글라스아트 몽실토끼 벽시계", hours:2, size:"디자인별 상이", photo:"caea5831c2324fb3f9ec27c89de5888a",
+  {id:"rabbit", craft:"glass", name:"몽실토끼 벽시계", hours:2, size:"디자인별 상이", photo:"caea5831c2324fb3f9ec27c89de5888a",
    desc:"토끼 모양 아크릴을 꾸미는 귀여운 벽시계입니다. 가벼워 꼭꼬핀으로 벽에 걸 수 있습니다.", tiers:[T("표준",60000)]},
-  {id:"shield", craft:"glass", name:"글라스아트 방패시계", hours:2.5, size:"가로 24cm · 세로 20cm", photo:"1f71a351dbb538252e3176875cf69904",
+  {id:"shield", craft:"glass", name:"방패시계(아크릴)", hours:2.5, size:"가로 24cm · 세로 20cm", photo:"1f71a351dbb538252e3176875cf69904",
    desc:"큰 방패 모양 아크릴 벽시계입니다. 도안에 따라 소요시간과 난이도가 달라집니다.", tiers:[T("표준",65000)]},
-  {id:"desk", craft:"glass", name:"글라스아트 탁상시계", hours:2.5, size:"가로 16.5cm · 세로 13cm", photo:"f0530f7039c6c136547f272b9f9bc48e",
+  {id:"desk", craft:"glass", name:"탁상시계", hours:2.5, size:"가로 16.5cm · 세로 13cm", photo:"f0530f7039c6c136547f272b9f9bc48e",
    desc:"ㄴ자 형태로 세워 두는 탁상시계입니다. 도안에 따라 고급스럽게 또는 귀엽게 완성할 수 있습니다.", tiers:[T("표준",60000)]},
-  {id:"mirror", craft:"glass", name:"글라스아트 팔각 거울", hours:1.5, size:"23×23cm", photo:"86d3fdfc6d25c886617aa9806943552f",
+  {id:"mirror", craft:"glass", name:"팔각거울", hours:1.5, size:"23×23cm", photo:"86d3fdfc6d25c886617aa9806943552f",
    desc:"우드 프레임 팔각 거울 가장자리에 포인트 도안을 배치해 꾸밉니다. 프레임 내추럴·브라운 선택.", tiers:[T("표준",70000)]},
-  {id:"shieldwood", craft:"glass", name:"글라스아트 방패시계 (우드프레임)", hours:2, size:"가로 24cm · 세로 20cm", photo:"4dfad2191e3214bda52b79ff9331d175",
+  {id:"shieldwood", craft:"glass", name:"방패시계(프레임)", hours:2, size:"가로 24cm · 세로 20cm", photo:"4dfad2191e3214bda52b79ff9331d175",
    desc:"방패시계에 우드 프레임을 더한 고급형입니다. 프레임 내추럴·브라운 선택.", tiers:[T("표준",80000)]},
-  {id:"lamp", craft:"glass", name:"글라스아트 벽등", hours:2.5, size:"15×15cm", photo:"aa840a0c9bc3b6040de1de47842f1a63",
+  {id:"lamp", craft:"glass", name:"벽등", hours:2.5, size:"15×15cm", photo:"aa840a0c9bc3b6040de1de47842f1a63",
    desc:"아크릴에 글라스아트로 만드는 벽등입니다. 전구·전선·스위치 포함.", tiers:[T("표준",90000)]}
 ];
 const CRAFT = {rattan:"라탄", glass:"글라스아트"};
@@ -337,7 +337,7 @@ function itemHTML(r,isUp){
 
 function inquiryText(list){
   const a=state.a;
-  const picks=list.slice(0,3).map(r=>r.multi?`${r.it.name}(${r.t.k})`:r.it.name);
+  const picks=list.slice(0,3).map(r=>`${CRAFT[r.it.craft]} ${r.it.name}`);
   return `[온들 단체수업 문의]
 · 인원: ${a.people}명
 · 1인 예산: ${label("budget",a.budget)}
