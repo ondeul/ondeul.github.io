@@ -308,7 +308,7 @@ function match(){
   const fit=[], low=[], up=[];
   ITEMS.forEach(it=>{
     if(a.craft!=="any" && it.craft!==a.craft) return;
-    if(it.hours>a.time) return;
+    /* 수업 시간은 밑작업으로 조정 가능해서 걸러내지 않음(문의 문구에만 들어감) */
     it.tiers.forEach(t=>{
       const r={it,t,price:priceFor(t.p,n,it.craft)+(n>=ASSIST[it.craft]?ASSIST_FEE*RULES[it.craft].assistShare/n:0),multi:it.tiers.length>1};
       if(r.price>max+TOLERANCE){ if(r.price<=max+UPSELL_GAP) up.push(r); }
