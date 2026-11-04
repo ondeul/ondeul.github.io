@@ -118,6 +118,12 @@ div.ph{cursor:default}
 .item.feat .tag{background:color-mix(in srgb,var(--green-ink) 14%,transparent);color:var(--green-ink)}
 .item.feat .top::before{content:"추천 수업";align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.06em;padding:3px 10px;border-radius:999px;background:var(--green-ink);color:var(--green);margin-bottom:6px}
 @media (max-width:420px){.item.feat{grid-template-columns:minmax(0,1fr)}.item.feat .body{padding:0 4px 4px}.item p{font-size:12px}.tags .tag:nth-child(2){display:none}.item.feat .tags .tag:nth-child(2){display:inline}}
+.sub{display:flex;flex-direction:column;gap:10px}
+.sub:empty{display:none}
+.sub-label{margin:0;font-size:13px;color:var(--muted)}
+.sub .chip[aria-pressed="true"]{background:var(--green);color:var(--green-ink)}
+.sub input{font:inherit;font-size:16px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);width:100%}
+.sub input:focus{border-color:var(--green);outline:none}
 .notice{margin:0;padding:0 4px;word-break:keep-all;font-size:13px;line-height:1.7;color:var(--muted)}
 .empty{color:var(--muted);font-size:14px;background:var(--surface);border-radius:var(--r-md);padding:18px}
 .ask{background:var(--surface);border-radius:var(--r-lg);padding:22px 20px;display:flex;flex-direction:column;gap:12px;border:1.5px solid var(--green)}
@@ -230,7 +236,9 @@ const ITEMS = [
    desc:"아크릴에 글라스아트로 만드는 벽등입니다. 전구·전선·스위치 포함.", tiers:[T("표준",90000)]}
 ];
 const CRAFT = {rattan:"라탄", glass:"글라스아트"};
-const AUD = {office:"직장인", kids:"어린이·청소년", family:"부모·자녀", senior:"시니어", org:"기관·복지 프로그램"};
+const AUD = {office:"직장인", kids:"어린이·청소년", family:"부모·자녀", senior:"시니어", org:"기관·복지 프로그램", etc:"기타"};
+const REGIONS = ["서울","경기","인천","기타"];
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 const Q = [
   {key:"people", type:"number", title:"참여 인원은 몇 명인가요?", hint:"대략적인 인원이어도 괜찮습니다."},
@@ -260,6 +268,25 @@ function renderProgress(){
   progress.innerHTML="";
   for(let i=0;i<=Q.length;i++){const s=document.createElement("span");if(i<=state.step)s.className="on";progress.appendChild(s);}
 }
+function placeLabel(){const a=state.a;if(a.place!=="out")return label("place",a.place);const r=a.region==="기타"?((a.regionText||"").trim()||"기타"):(a.region||"");return r?`출강 (${r})`:"출강";}
+function audLabel(){const a=state.a;return a.aud==="etc"?(((a.audText||"").trim())||"기타"):AUD[a.aud];}
+function needsSub(q){const a=state.a;return (q.key==="place"&&a.place==="out")||(q.key==="aud"&&a.aud==="etc");}
+function valid(q){const a=state.a;if(a[q.key]===undefined)return false;
+  if(q.key==="place"&&a.place==="out"){if(!a.region)return false;if(a.region==="기타"&&!(a.regionText||"").trim())return false;}
+  if(q.key==="aud"&&a.aud==="etc"&&!(a.audText||"").trim())return false;return true;}
+function renderSub(q){
+  const box=document.getElementById("sub"), a=state.a; if(!box)return;
+  if(q.key==="place"&&a.place==="out"){
+    box.innerHTML=`<p class="sub-label">출강 지역을 선택해 주세요.</p><div class="quick">${REGIONS.map(r=>`<button type="button" class="chip" data-r="${r}" aria-pressed="${a.region===r}">${r}</button>`).join("")}</div>${a.region==="기타"?`<input id="regionText" type="text" placeholder="지역을 입력해 주세요 (예: 부산, 대전)" value="${esc(a.regionText||"")}" aria-label="출강 지역">`:""}`;
+    box.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{a.region=c.dataset.r;renderSub(q);const i=document.getElementById("regionText");if(i)i.focus();});
+    const i=document.getElementById("regionText"); if(i)i.oninput=()=>{a.regionText=i.value;updateNext(q);};
+  } else if(q.key==="aud"&&a.aud==="etc"){
+    box.innerHTML=`<input id="audText" type="text" placeholder="참여 대상을 입력해 주세요 (예: 대학생 동아리, 교직원)" value="${esc(a.audText||"")}" aria-label="참여 대상">`;
+    const i=document.getElementById("audText"); i.oninput=()=>{a.audText=i.value;updateNext(q);};
+  } else box.innerHTML="";
+  updateNext(q);
+}
+function updateNext(q){const n=document.getElementById("next");if(n)n.disabled=!valid(q);}
 function label(key,v){const q=Q.find(x=>x.key===key);const o=q.opts.find(o=>same(o.v,v));return o?o.t:"";}
 
 let lastStep=0;
@@ -277,7 +304,7 @@ function render(){
       <div class="quick">${[5,10,15,20,30,50].map(n=>`<button type="button" class="chip" data-n="${n}">${n}명</button>`).join("")}</div>
       <p class="disc" id="disc"></p>`;
   } else {
-    html+=`<div class="opts">${q.opts.map((o,i)=>`<button type="button" class="opt" data-i="${i}" aria-pressed="${val!==undefined&&same(val,o.v)}"><span>${o.d||o.t}</span>${o.s?`<small>${o.s}</small>`:""}</button>`).join("")}</div>`;
+    html+=`<div class="opts">${q.opts.map((o,i)=>`<button type="button" class="opt" data-i="${i}" aria-pressed="${val!==undefined&&same(val,o.v)}"><span>${o.d||o.t}</span>${o.s?`<small>${o.s}</small>`:""}</button>`).join("")}</div><div class="sub" id="sub"></div>`;
   }
   html+=`<div class="nav"><button type="button" class="btn" id="back" ${state.step===0?"disabled":""}>이전</button>
     <button type="button" class="btn primary" id="next" ${val===undefined?"disabled":""}>${state.step===Q.length-1?"결과 보기":"다음"}</button></div></section>`;
@@ -297,8 +324,11 @@ function render(){
     stage.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
       state.a[q.key]=q.opts[+b.dataset.i].v;
       stage.querySelectorAll(".opt").forEach(x=>x.setAttribute("aria-pressed",x===b));
+      renderSub(q);
+      if(needsSub(q)){const i=document.querySelector("#sub input");if(i)i.focus();return;}
       setTimeout(()=>{state.step++;render()},160);
     });
+    renderSub(q);
   }
 }
 
@@ -342,8 +372,8 @@ function inquiryText(list){
 · 인원: ${a.people}명
 · 1인 예산: ${label("budget",a.budget)}
 · 수업 시간: ${label("time",a.time)}
-· 장소: ${label("place",a.place)}
-· 대상: ${AUD[a.aud]}
+· 장소: ${placeLabel()}
+· 대상: ${audLabel()}
 · 관심 품목: ${picks.length?picks.join(", "):"추천 부탁드립니다"}
 · 희망 날짜:
 · 기관명:
@@ -360,10 +390,10 @@ function assistNote(){
 }
 function renderResult(){
   const a=state.a, {fit,low,up}=match(), dl=discLabel(a.people);
-  const tags=[`${a.people}명`,label("budget",a.budget),label("time",a.time),label("place",a.place),AUD[a.aud],a.craft==="any"?"라탄·글라스아트":CRAFT[a.craft]];
+  const tags=[`${a.people}명`,label("budget",a.budget),label("time",a.time),placeLabel(),audLabel(),a.craft==="any"?"라탄·글라스아트":CRAFT[a.craft]];
   const grid=(list,isUp,feat)=>`<div class="list">${list.map((r,i)=>{const h=itemHTML(r,isUp);return feat&&i===0?h.replace('class="item"','class="item feat"'):h;}).join("")}</div>`;
   let html=`<section style="display:flex;flex-direction:column;gap:16px">
-    <div class="card" style="gap:10px"><div class="qnum">선택한 조건</div><div class="summary">${tags.map(t=>`<span>${t}</span>`).join("")}</div>
+    <div class="card" style="gap:10px"><div class="qnum">선택한 조건</div><div class="summary">${tags.map(t=>`<span>${esc(t)}</span>`).join("")}</div>
       ${assistNote()}</div>
     <p class="notice"><b class="emph">자세한 금액과 구성은<br>인원•예산•일정에 맞춰 문의 주시면 안내드립니다.<br>같은 품목도 예산에 따라 크기나 도안을 조절할 수 있습니다.</b></p>`;
   if(fit.length) html+=`<h2 class="sec-title band">예산에 딱 맞는 수업 <em>${fit.length}개</em></h2>${grid(fit,false,true)}`;
@@ -373,7 +403,7 @@ function renderResult(){
   html+=`
     <div class="ask"><h2 class="sec-title" style="margin:0">이 조건으로 문의하기</h2>
       <p class="hint" style="margin:0">희망 날짜, 연락처, 제안서 받으실 메일 주소 작성 후<br>버튼을 누르면 문구가 복사되고 채팅창이 열립니다.<br>붙여넣고 보내기 눌러주세요!</p>
-      <textarea id="msg" aria-label="문의 문구" style="min-height:230px">${inquiryText([...fit,...low,...up])}</textarea>
+      <textarea id="msg" aria-label="문의 문구" style="min-height:230px">${esc(inquiryText([...fit,...low,...up]))}</textarea>
       <div class="row">
         <a class="btn kakao" data-copy href="https://pf.kakao.com/_xfVQVxj/chat" target="_blank" rel="noopener">카카오톡 채널로 문의하기</a>
         <a class="btn" data-copy href="https://ig.me/m/on_deul" target="_blank" rel="noopener">인스타그램 DM으로 문의</a>
