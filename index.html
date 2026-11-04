@@ -233,16 +233,16 @@ const CRAFT = {rattan:"라탄", glass:"글라스아트"};
 const AUD = {office:"직장인", kids:"어린이·청소년", family:"부모·자녀", senior:"시니어", org:"기관·복지 프로그램"};
 
 const Q = [
-  {key:"people", type:"number", title:"참여 인원은 몇 명입니까?", hint:"대략적인 인원이어도 괜찮습니다."},
-  {key:"budget", type:"single", title:"1인당 예산은 어느 정도입니까?", hint:"재료비와 강사비를 포함한 1인 금액 기준입니다.",
+  {key:"people", type:"number", title:"참여 인원은 몇 명인가요?", hint:"대략적인 인원이어도 괜찮습니다."},
+  {key:"budget", type:"single", title:"1인당 예산은 어느 정도인가요?", hint:"재료비와 강사비를 포함한 1인 금액 기준입니다.",
     opts:[{v:[0,25000],t:"2만 원대 이하",d:"2만 원대<br>이하"},{v:[25000,35000],t:"2만 5천~3만 5천 원",d:"2만 5천원<br>~ 3만 5천원"},{v:[35000,45000],t:"3만 5천~4만 5천 원",d:"3만 5천원<br>~ 4만 5천원"},{v:[45000,55000],t:"4만 5천~5만 5천 원",d:"4만 5천원<br>~ 5만 5천원"},{v:[55000,70000],t:"5만 5천~7만 원",d:"5만 5천원<br>~ 7만원"},{v:[70000,999999],t:"7만 원 이상",d:"7만원<br>이상"}]},
-  {key:"time", type:"single", title:"수업 시간은 얼마나 가능합니까?",
+  {key:"time", type:"single", title:"수업 시간은 얼마나 가능하신가요?",
     opts:[{v:1,t:"1시간"},{v:1.5,t:"1시간 30분"},{v:2,t:"2시간"},{v:9,t:"상관없음"}]},
-  {key:"place", type:"single", title:"어디서 진행합니까?",
+  {key:"place", type:"single", title:"어디서 진행하시나요?",
     opts:[{v:"visit",t:"온들 공방 방문",s:"서울 금천구"},{v:"out",t:"출강",s:"회사·학교·기관"},{v:"any",t:"미정"}]},
-  {key:"aud", type:"single", title:"참여 대상은 누구입니까?",
+  {key:"aud", type:"single", title:"참여 대상은 누구인가요?",
     opts:Object.entries(AUD).map(([v,t])=>({v,t}))},
-  {key:"craft", type:"single", title:"원하는 공예가 있습니까?",
+  {key:"craft", type:"single", title:"원하시는 공예가 있나요?",
     opts:[{v:"rattan",t:"라탄"},{v:"glass",t:"글라스아트"},{v:"any",t:"둘 다 좋음"}]}
 ];
 
